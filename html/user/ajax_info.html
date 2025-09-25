@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>
+   Personal center - {$maccms.site_name}
+  </title>
+<meta content="Personal center,{$maccms.site_keywords}" name="keywords"/>
+<meta content="{$maccms.site_description}" name="description"/>
+  {include file="public/include"}
+  {include file="user/include"}
+ </head>
+<body class="fed-min-width">
+<div class="shadow">
+</div>
+  {include file="public/head"}
+  <div class="wrapped">
+<main>
+    {include file="public/nav"}
+    <div>
+<div class="fed-part-case">
+<div class="fed-user-head fed-margin-top fed-back-whits">
+<div class="fed-list-pics fed-lazy fed-part-5by2 fed-part-rows" style="background:url({$maccms.path_tpl}ksassets/image/user.jpg);">
+<div class="fed-part-core fed-text-center">
+<div class="fed-user-image" data-role="{:mac_url('user/portrait')}">
+<img class="face fed-user-avat fed-part-roun" src="{$obj.user_portrait|mac_default='static/images/touxiang.png'|mac_url_img}?v={:time()}"/>
+</div>
+<span class="fed-visible fed-text-white fed-padding">
+          {$obj.user_name}
+         </span>
+</div>
+</div>
+<div class="fed-padding fed-part-rows fed-back-whits fed-hide-md">
+<ul class="fed-user-brief fed-part-rows fed-back-whits">
+<li class="fed-padding-x fed-text-center fed-col-xs4">
+<span class="fed-visible fed-text-gules">
+           {$obj.user_points}
+          </span>
+<span class="fed-visible">
+           My points
+          </span>
+</li>
+<li class="fed-padding-x fed-text-center fed-line-left fed-col-xs4">
+<span class="fed-visible fed-text-gules">
+           {$obj.group.group_name}
+          </span>
+<span class="fed-visible">
+           My level
+          </span>
+</li>
+<li class="fed-padding-x fed-text-center fed-line-left fed-col-xs4">
+<span class="fed-visible fed-text-gules">
+           {$obj.user_login_num}
+          </span>
+<span class="fed-visible">
+           Number of login
+          </span>
+</li>
+</ul>
+</div>
+</div>
+<div class="fed-part-rows">
+<div class="fed-main-left fed-col-xs12 fed-col-md4 fed-col-lg3 fed-hide-sm fed-show-md-block">
+<div class="fed-part-layout fed-back-whits">
+<div class="fed-user-title fed-list-head fed-part-rows fed-padding fed-line-bottom">
+<h2 class="fed-font-xvi fed-padding">
+           My information
+          </h2>
+<ul class="fed-part-tips fed-padding">
+<li class="fed-padding">
+<a class="fed-more" href="{:mac_url('user/index')}">
+             return
+            </a>
+</li>
+</ul>
+</div>
+<ul class="fed-user-list fed-part-rows fed-back-whits">
+<li class="fed-padding-x fed-part-rows fed-line-bottom">
+<div class="fed-user-input fed-visible fed-font-xvi fed-part-rows">
+<span class="fed-col-xs4 fed-col-sm3 fed-part-eone">
+             username
+            </span>
+<span class="fed-col-xs7 fed-col-sm8 fed-part-eone">
+             {$obj.user_name}
+            </span>
+<span class="fed-col-xs1 fed-col-sm1 fed-part-eone fed-text-right">
+<i class="fed-icon-font fed-icon-you">
+</i>
+</span>
+</div>
+</li>
+<li class="fed-padding-x fed-part-rows fed-line-bottom">
+<div class="fed-user-input fed-visible fed-font-xvi fed-part-rows">
+<span class="fed-col-xs4 fed-col-sm3 fed-part-eone">
+             Membership group
+            </span>
+<span class="fed-col-xs7 fed-col-sm8 fed-part-eone">
+             {$obj.group.group_name}
+            </span>
+<span class="fed-col-xs1 fed-col-sm1 fed-part-eone fed-text-right">
+<i class="fed-icon-font fed-icon-you">
+</i>
+</span>
+</div>
+</li>
+<li class="fed-padding-x fed-part-rows fed-line-bottom">
+<div class="fed-user-input fed-visible fed-font-xvi fed-part-rows">
+<span class="fed-col-xs4 fed-col-sm3 fed-part-eone">
+             Expire
+            </span>
+<span class="fed-col-xs7 fed-col-sm8 fed-part-eone">
+             {$obj.user_end_time|mac_day|mac_default='Unlimited period'}
+            </span>
+<span class="fed-col-xs1 fed-col-sm1 fed-part-eone fed-text-right">
+<i class="fed-icon-font fed-icon-you">
+</i>
+</span>
+</div>
+</li>
+<li class="fed-padding-x fed-part-rows fed-line-bottom">
+<div class="fed-user-input fed-visible fed-font-xvi fed-part-rows">
+<span class="fed-col-xs4 fed-col-sm3 fed-part-eone">
+             Account points
+            </span>
+<span class="fed-col-xs7 fed-col-sm8 fed-part-eone">
+             {$obj.user_points}
+            </span>
+<span class="fed-col-xs1 fed-col-sm1 fed-part-eone fed-text-right">
+<i class="fed-icon-font fed-icon-you">
+</i>
+</span>
+</div>
+</li>
+<li class="fed-padding-x fed-part-rows fed-line-bottom">
+<div class="fed-user-input fed-visible fed-font-xvi fed-part-rows">
+<span class="fed-col-xs4 fed-col-sm3 fed-part-eone">
+             QQNumber
+            </span>
+<span class="fed-col-xs7 fed-col-sm8 fed-part-eone">
+             {$obj.user_qq|mac_default='Fail to fill in'}
+            </span>
+<span class="fed-col-xs1 fed-col-sm1 fed-part-eone fed-text-right">
+<i class="fed-icon-font fed-icon-you">
+</i>
+</span>
+</div>
+</li>
+<li class="fed-padding-x fed-part-rows fed-line-bottom">
+<div class="fed-user-input fed-visible fed-font-xvi fed-part-rows">
+<span class="fed-col-xs4 fed-col-sm3 fed-part-eone">
+             Email address
+            </span>
+<span class="fed-col-xs7 fed-col-sm8 fed-part-eone">
+             {$obj.user_email|mac_default='Fail to fill in'}
+            </span>
+<span class="fed-col-xs1 fed-col-sm1 fed-part-eone fed-text-right">
+<i class="fed-icon-font fed-icon-you">
+</i>
+</span>
+</div>
+</li>
+<li class="fed-padding-x fed-part-rows fed-line-bottom">
+<div class="fed-user-input fed-visible fed-font-xvi fed-part-rows">
+<span class="fed-col-xs4 fed-col-sm3 fed-part-eone">
+             Contact the phone
+            </span>
+<span class="fed-col-xs7 fed-col-sm8 fed-part-eone">
+             {$obj.user_phone|mac_default='Fail to fill in'}
+            </span>
+<span class="fed-col-xs1 fed-col-sm1 fed-part-eone fed-text-right">
+<i class="fed-icon-font fed-icon-you">
+</i>
+</span>
+</div>
+</li>
+<li class="fed-padding-x fed-part-rows fed-line-bottom">
+<div class="fed-user-input fed-visible fed-font-xvi fed-part-rows">
+<span class="fed-col-xs4 fed-col-sm3 fed-part-eone">
+             Registration time
+            </span>
+<span class="fed-col-xs7 fed-col-sm8 fed-part-eone">
+             {$obj.user_reg_time|mac_day|mac_default='unknown'}
+            </span>
+<span class="fed-col-xs1 fed-col-sm1 fed-part-eone fed-text-right">
+<i class="fed-icon-font fed-icon-you">
+</i>
+</span>
+</div>
+</li>
+<li class="fed-padding-x fed-part-rows fed-line-bottom">
+<div class="fed-user-input fed-visible fed-font-xvi fed-part-rows">
+<span class="fed-col-xs4 fed-col-sm3 fed-part-eone">
+             Login time
+            </span>
+<span class="fed-col-xs7 fed-col-sm8 fed-part-eone">
+             {$obj.user_login_time|mac_day}
+            </span>
+<span class="fed-col-xs1 fed-col-sm1 fed-part-eone fed-text-right">
+<i class="fed-icon-font fed-icon-you">
+</i>
+</span>
+</div>
+</li>
+<li class="fed-padding-x fed-part-rows fed-line-bottom">
+<div class="fed-user-input fed-visible fed-font-xvi fed-part-rows">
+<span class="fed-col-xs4 fed-col-sm3 fed-part-eone">
+             Log inIP
+            </span>
+<span class="fed-col-xs7 fed-col-sm8 fed-part-eone">
+             {$obj.user_login_ip|long2ip}
+            </span>
+<span class="fed-col-xs1 fed-col-sm1 fed-part-eone fed-text-right">
+<i class="fed-icon-font fed-icon-you">
+</i>
+</span>
+</div>
+</li>
+<li class="fed-padding-x fed-part-rows fed-line-bottom">
+<div class="fed-user-input fed-visible fed-font-xvi fed-part-rows">
+<span class="fed-col-xs4 fed-col-sm3 fed-part-eone">
+             Number of login
+            </span>
+<span class="fed-col-xs7 fed-col-sm8 fed-part-eone">
+             {$obj.user_login_num}
+            </span>
+<span class="fed-col-xs1 fed-col-sm1 fed-part-eone fed-text-right">
+<i class="fed-icon-font fed-icon-you">
+</i>
+</span>
+</div>
+</li>
+          {if $GLOBALS['config']['user']['invite_reg_points'] gt 0}
+          <li class="fed-padding-x fed-part-rows fed-line-bottom">
+<div class="fed-user-input fed-visible fed-font-xvi fed-part-rows">
+<span class="fed-col-xs4 fed-col-sm3 fed-part-eone">
+             Promotion registration link
+            </span>
+<span class="fed-col-xs6 fed-col-sm8 fed-part-eone">
+<input class="fed-visible" id="url" value="{$maccms.http_type}{$maccms.site_url}{:mac_url('user/reg')}?uid={$obj.user_id}"/>
+</span>
+<span class="fed-col-xs2 fed-col-sm1 fed-part-eone fed-text-right" onclick="copyUrl()">
+             copy
+            </span>
+</div>
+</li>
+          {/if}
+		{if $GLOBALS['config']['user']['invite_visit_points'] gt 0}
+          <li class="fed-padding-x fed-part-rows fed-line-bottom">
+<div class="fed-user-input fed-visible fed-font-xvi fed-part-rows">
+<span class="fed-col-xs4 fed-col-sm3 fed-part-eone">
+             Promoting access link
+            </span>
+<span class="fed-col-xs6 fed-col-sm8 fed-part-eone">
+<input class="fed-visible" id="url2" value="{$maccms.http_type}{$maccms.site_url}{:mac_url('user/visit')}?uid={$obj.user_id}"/>
+</span>
+<span class="fed-col-xs2 fed-col-sm1 fed-part-eone fed-text-right" onclick="copyUrl2()">
+             copy
+            </span>
+</div>
+</li>
+          {/if}
+         </ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+   {include file="public/foot"}
+  </div>
+<script>
+   $(".face").imageUpload({
+		formAction: "{:url('user/portrait')}",
+		inputFileName:'file',
+		browseButtonValue: '',
+		browseButtonClass:'btn btn-default btn-xs fed-user-alter fed-part-roun fed-icon-font fed-icon-xiugai',
+		automaticUpload: true,
+		hideDeleteButton: true,
+		hover:true
+	})
+	$(".jQuery-image-upload-controls").mouseenter(function(){
+    $(".jQuery-image-upload-controls").css("display","block");
+	});
+	$(".jQuery-image-upload-controls").mouseleave(function(){
+    $(".jQuery-image-upload-controls").css("display","none");
+	});
+	$(".face").on("imageUpload.uploadFailed", function (ev, err) {
+		alert(err);
+	});
+  </script>
+</body>
+  </html>
+  
