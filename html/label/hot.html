@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
-     {include file="seo/up"}
-     	{assign name="$maccms.aid" value="9996" /}
+     {include file="seo/hot"}
+     	{assign name="$maccms.aid" value="9998" /}
     {include file="public/include"}
 	</head>
 	<body>
@@ -16,7 +16,7 @@
 		<div class="wrap">
 			<div class="heading">
 				<div class="title">
-					<h1>Video with the most likes</h1>
+					<h1>Hot videos</h1>
 				</div>
 				<div class="sort">
 					<div class="filter">
@@ -46,7 +46,7 @@
 				</div>
 			</div>
 			<div class="block-post">
-				 {maccms:vod   paging="yes"  type="all" order="desc" by="up"  pageurl="label/up"}
+				 {maccms:vod   paging="yes"  type="all" order="desc" by="hits"  pageurl="label/hot"}
 				{include file="public/vodbox"}
                 {/maccms:vod} 	
 			</div>
