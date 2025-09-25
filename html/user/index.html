@@ -4,9 +4,9 @@
 <head>
 <meta charset="utf-8"/>
 <title>
-   Personal center - {$maccms.site_name}
+   9 - {$maccms.site_name}
   </title>
-<meta content="Personal center,{$maccms.site_keywords}" name="keywords"/>
+<meta content="9,{$maccms.site_keywords}" name="keywords"/>
 <meta content="{$maccms.site_description}" name="description"/>
   {include file="public/include"}
   {include file="user/include"}
@@ -24,7 +24,7 @@
 <div class="fed-list-pics fed-lazy fed-part-5by2 fed-part-rows" style="background:url({$maccms.path_tpl}ksassets/image/user.jpg);">
 <div class="fed-part-core fed-text-center">
 <div class="fed-user-image" data-role="{:mac_url('user/portrait')}">
-<img class="face fed-user-avat fed-part-roun" src="{$obj.user_portrait|mac_default='static/images/touxiang.png'|mac_url_img}?v={:time()}"/>
+<img class="face fed-user-avat fed-part-roun jQuery-image-upload" src="{$obj.user_portrait|mac_default='static/images/touxiang.png'|mac_url_img}"/>
 </div>
 <span class="fed-visible fed-text-white fed-padding">
           {$obj.user_name}
@@ -38,7 +38,7 @@
            {$obj.user_points}
           </span>
 <span class="fed-visible">
-           My points
+           9
           </span>
 </li>
 <li class="fed-padding-x fed-text-center fed-line-left fed-col-xs4">
@@ -46,7 +46,7 @@
            {$obj.group.group_name}
           </span>
 <span class="fed-visible">
-           My level
+           9
           </span>
 </li>
 <li class="fed-padding-x fed-text-center fed-line-left fed-col-xs4">
@@ -54,7 +54,7 @@
            {$obj.user_login_num}
           </span>
 <span class="fed-visible">
-           Number of login
+           9
           </span>
 </li>
 </ul>
@@ -62,15 +62,18 @@
 </div>
 <div class="fed-part-rows">
 <div class="fed-main-left fed-col-xs12 fed-col-md4 fed-col-lg3 fed-hide-sm fed-show-md-block">
+        {include file="user/menu"}
+       </div>
+<div class="fed-main-right fed-col-xs12 fed-col-md8 fed-col-lg9 fed-hide-xs fed-hide-sm fed-show-md-block">
 <div class="fed-part-layout fed-back-whits">
 <div class="fed-user-title fed-list-head fed-part-rows fed-padding fed-line-bottom">
 <h2 class="fed-font-xvi fed-padding">
-           My information
+           9
           </h2>
 <ul class="fed-part-tips fed-padding">
 <li class="fed-padding">
 <a class="fed-more" href="{:mac_url('user/index')}">
-             return
+             9
             </a>
 </li>
 </ul>
@@ -79,7 +82,7 @@
 <li class="fed-padding-x fed-part-rows fed-line-bottom">
 <div class="fed-user-input fed-visible fed-font-xvi fed-part-rows">
 <span class="fed-col-xs4 fed-col-sm3 fed-part-eone">
-             username
+             9
             </span>
 <span class="fed-col-xs7 fed-col-sm8 fed-part-eone">
              {$obj.user_name}
@@ -93,7 +96,7 @@
 <li class="fed-padding-x fed-part-rows fed-line-bottom">
 <div class="fed-user-input fed-visible fed-font-xvi fed-part-rows">
 <span class="fed-col-xs4 fed-col-sm3 fed-part-eone">
-             Membership group
+             9
             </span>
 <span class="fed-col-xs7 fed-col-sm8 fed-part-eone">
              {$obj.group.group_name}
@@ -107,10 +110,10 @@
 <li class="fed-padding-x fed-part-rows fed-line-bottom">
 <div class="fed-user-input fed-visible fed-font-xvi fed-part-rows">
 <span class="fed-col-xs4 fed-col-sm3 fed-part-eone">
-             Expire
+             9
             </span>
 <span class="fed-col-xs7 fed-col-sm8 fed-part-eone">
-             {$obj.user_end_time|mac_day|mac_default='Unlimited period'}
+             {$obj.user_end_time|mac_day|mac_default='9'}
             </span>
 <span class="fed-col-xs1 fed-col-sm1 fed-part-eone fed-text-right">
 <i class="fed-icon-font fed-icon-you">
@@ -121,7 +124,7 @@
 <li class="fed-padding-x fed-part-rows fed-line-bottom">
 <div class="fed-user-input fed-visible fed-font-xvi fed-part-rows">
 <span class="fed-col-xs4 fed-col-sm3 fed-part-eone">
-             Account points
+             9
             </span>
 <span class="fed-col-xs7 fed-col-sm8 fed-part-eone">
              {$obj.user_points}
@@ -135,10 +138,10 @@
 <li class="fed-padding-x fed-part-rows fed-line-bottom">
 <div class="fed-user-input fed-visible fed-font-xvi fed-part-rows">
 <span class="fed-col-xs4 fed-col-sm3 fed-part-eone">
-             QQNumber
+             QQ9
             </span>
 <span class="fed-col-xs7 fed-col-sm8 fed-part-eone">
-             {$obj.user_qq|mac_default='Fail to fill in'}
+             {$obj.user_qq|mac_default='9'}
             </span>
 <span class="fed-col-xs1 fed-col-sm1 fed-part-eone fed-text-right">
 <i class="fed-icon-font fed-icon-you">
@@ -149,10 +152,10 @@
 <li class="fed-padding-x fed-part-rows fed-line-bottom">
 <div class="fed-user-input fed-visible fed-font-xvi fed-part-rows">
 <span class="fed-col-xs4 fed-col-sm3 fed-part-eone">
-             Email address
+             9
             </span>
 <span class="fed-col-xs7 fed-col-sm8 fed-part-eone">
-             {$obj.user_email|mac_default='Fail to fill in'}
+             {$obj.user_email|mac_default='9'}
             </span>
 <span class="fed-col-xs1 fed-col-sm1 fed-part-eone fed-text-right">
 <i class="fed-icon-font fed-icon-you">
@@ -163,10 +166,10 @@
 <li class="fed-padding-x fed-part-rows fed-line-bottom">
 <div class="fed-user-input fed-visible fed-font-xvi fed-part-rows">
 <span class="fed-col-xs4 fed-col-sm3 fed-part-eone">
-             Contact the phone
+             9
             </span>
 <span class="fed-col-xs7 fed-col-sm8 fed-part-eone">
-             {$obj.user_phone|mac_default='Fail to fill in'}
+             {$obj.user_phone|mac_default='9'}
             </span>
 <span class="fed-col-xs1 fed-col-sm1 fed-part-eone fed-text-right">
 <i class="fed-icon-font fed-icon-you">
@@ -177,10 +180,10 @@
 <li class="fed-padding-x fed-part-rows fed-line-bottom">
 <div class="fed-user-input fed-visible fed-font-xvi fed-part-rows">
 <span class="fed-col-xs4 fed-col-sm3 fed-part-eone">
-             Registration time
+             9
             </span>
 <span class="fed-col-xs7 fed-col-sm8 fed-part-eone">
-             {$obj.user_reg_time|mac_day|mac_default='unknown'}
+             {$obj.user_reg_time|mac_day|mac_default='9'}
             </span>
 <span class="fed-col-xs1 fed-col-sm1 fed-part-eone fed-text-right">
 <i class="fed-icon-font fed-icon-you">
@@ -191,7 +194,7 @@
 <li class="fed-padding-x fed-part-rows fed-line-bottom">
 <div class="fed-user-input fed-visible fed-font-xvi fed-part-rows">
 <span class="fed-col-xs4 fed-col-sm3 fed-part-eone">
-             Login time
+             9
             </span>
 <span class="fed-col-xs7 fed-col-sm8 fed-part-eone">
              {$obj.user_login_time|mac_day}
@@ -205,7 +208,7 @@
 <li class="fed-padding-x fed-part-rows fed-line-bottom">
 <div class="fed-user-input fed-visible fed-font-xvi fed-part-rows">
 <span class="fed-col-xs4 fed-col-sm3 fed-part-eone">
-             Log inIP
+             9IP
             </span>
 <span class="fed-col-xs7 fed-col-sm8 fed-part-eone">
              {$obj.user_login_ip|long2ip}
@@ -219,7 +222,7 @@
 <li class="fed-padding-x fed-part-rows fed-line-bottom">
 <div class="fed-user-input fed-visible fed-font-xvi fed-part-rows">
 <span class="fed-col-xs4 fed-col-sm3 fed-part-eone">
-             Number of login
+             9
             </span>
 <span class="fed-col-xs7 fed-col-sm8 fed-part-eone">
              {$obj.user_login_num}
@@ -234,13 +237,13 @@
           <li class="fed-padding-x fed-part-rows fed-line-bottom">
 <div class="fed-user-input fed-visible fed-font-xvi fed-part-rows">
 <span class="fed-col-xs4 fed-col-sm3 fed-part-eone">
-             Promotion registration link
+             9
             </span>
-<span class="fed-col-xs6 fed-col-sm8 fed-part-eone">
+<span class="fed-col-xs7 fed-col-sm8 fed-part-eone">
 <input class="fed-visible" id="url" value="{$maccms.http_type}{$maccms.site_url}{:mac_url('user/reg')}?uid={$obj.user_id}"/>
 </span>
 <span class="fed-col-xs2 fed-col-sm1 fed-part-eone fed-text-right" onclick="copyUrl()">
-             copy
+             9
             </span>
 </div>
 </li>
@@ -249,13 +252,13 @@
           <li class="fed-padding-x fed-part-rows fed-line-bottom">
 <div class="fed-user-input fed-visible fed-font-xvi fed-part-rows">
 <span class="fed-col-xs4 fed-col-sm3 fed-part-eone">
-             Promoting access link
+             9
             </span>
-<span class="fed-col-xs6 fed-col-sm8 fed-part-eone">
+<span class="fed-col-xs7 fed-col-sm8 fed-part-eone">
 <input class="fed-visible" id="url2" value="{$maccms.http_type}{$maccms.site_url}{:mac_url('user/visit')}?uid={$obj.user_id}"/>
 </span>
 <span class="fed-col-xs2 fed-col-sm1 fed-part-eone fed-text-right" onclick="copyUrl2()">
-             copy
+             9
             </span>
 </div>
 </li>
@@ -270,8 +273,21 @@
    {include file="public/foot"}
   </div>
 <script>
-   $(".face").imageUpload({
-		formAction: "{:url('user/portrait')}",
+   function copyUrl() {
+		var Url = document.getElementById("url");
+		Url.select(); /*9*/ 
+		document.execCommand("Copy"); /*9*/ 
+		layer.msg("Your promotional registration address has been copied, USE Ctrl+V Paste to the browser to open the link");
+	}
+	
+	function copyUrl2() {
+		var Url = document.getElementById("url2");
+		Url.select(); /*9*/ 
+		document.execCommand("Copy"); /*9*/ 
+		layer.msg("Your promotion access address has been copied, and Ctrl+V Paste to the browser to open the link");
+	}
+	$(".face").imageUpload({
+		formAction: "/index.php/user/portrait.html",
 		inputFileName:'file',
 		browseButtonValue: '',
 		browseButtonClass:'btn btn-default btn-xs fed-user-alter fed-part-roun fed-icon-font fed-icon-xiugai',
@@ -286,7 +302,7 @@
     $(".jQuery-image-upload-controls").css("display","none");
 	});
 	$(".face").on("imageUpload.uploadFailed", function (ev, err) {
-		alert(err);
+		layer.msg(err);
 	});
   </script>
 </body>

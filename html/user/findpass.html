@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>
+   Retrieve the password - Personal center - {$maccms.site_name}
+  </title>
+<meta content="Personal center,{$maccms.site_keywords}" name="keywords"/>
+<meta content="{$maccms.site_description}" name="description"/>
+  {include file="public/include"}
+  {include file="user/include"}
+ </head>
+<body class="fed-min-width">
+<div class="shadow">
+</div>
+  {include file="public/head"}
+  <div class="wrapped">
+<main>
+    {include file="public/nav"}
+    <div>
+<div class="fed-part-case">
+<div class="fed-back-whits fed-part-height" style="min-height:35rem">
+<div class="fed-user-login fed-part-core">
+<div class="fed-list-head fed-part-rows fed-padding">
+<h2 class="fed-font-xvii fed-text-center">
+          Retrieve the password
+         </h2>
+</div>
+<form action="" class="fed-user-form fed-user-width fed-part-rows" id="fm" method="post">
+<input class="fed-user-text fed-col-xs12" id="user_name" name="user_name" placeholder="Please enter the account number" type="text"/>
+<input class="fed-user-text fed-col-xs12" id="user_question" name="user_question" placeholder="Please enter the problem" type="text"/>
+<input class="fed-user-text fed-col-xs12" id="user_answer" name="user_answer" placeholder="Please enter the answer" type="text"/>
+<input class="fed-user-text fed-col-xs12" id="user_pwd" maxlength="20" name="user_pwd" placeholder="Please enter the new password" type="password"/>
+<input class="fed-user-text fed-col-xs12" id="user_pwd2" maxlength="20" name="user_pwd2" placeholder="Enter the new password again" type="password"/>
+<input class="fed-user-text fed-col-xs8" id="verify" maxlength="4" name="verify" placeholder="Please enter the verification code" type="tel"/>
+<img class="fed-user-code fed-user-text fed-col-xs4" height="45" onclick="this.src=this.src+'?'" src="{:mac_url('verify/index')}" title="Not to see? Change one!"/>
+<span class="fed-user-tips fed-text-gules fed-padding-v fed-visible fed-col-xs12">
+</span>
+<input class="fed-subm-finds fed-user-submit fed-rims-info fed-btns-info fed-btns-green fed-col-xs12" id="btn_submit" type="button" value="submit"/>
+<a class="fed-padding fed-col-xs3 fed-text-left" href="{:mac_url('user/login')}">
+          Log in now
+         </a>
+<a class="fed-padding fed-col-xs3 fed-text-center" href="{:mac_url('user/findpass')}">
+          Issue
+         </a>
+<a class="fed-padding fed-col-xs3 fed-text-center" href="{:mac_url('user/findpass_msg')}?ac=email">
+          Retrieve the mailbox
+         </a>
+<a class="fed-padding fed-text-right" href="{:mac_url('user/findpass_msg')}?ac=phone" style="float:right">
+          Recovery
+         </a>
+<span class="fed-user-tips fed-text-gules fed-padding-v fed-visible fed-col-xs12">
+</span>
+</form>
+</div>
+</div>
+</div>
+</div>
+</main>
+   {include file="public/foot"}
+  </div>
+<script>
+   $(function(){
+		$("body").bind('keyup',function(event) {
+			if(event.keyCode==13){ $('#btnLogin').click(); }
+		});
+		$('#btn_submit').click(function() {
+			if ($('#user_name').val()  == '') { alert('Please enter the user！'); $("#user_name").focus(); return false; }
+			if ($('#user_pwd').val()  == '') { alert('Please enter the password！'); $("#user_pwd").focus(); return false; }
+			if ($('#verify').val()  == '') { alert('Please enter the verification code！'); $("#verify").focus(); return false; }
+
+			$.ajax({
+				url: "{:mac_url('user/findpass')}",
+				type: "post",
+				dataType: "json",
+				data: $('#fm').serialize(),
+				beforeSend: function () {
+					$("#btn_submit").val("loading...");
+				},
+				success: function (r) {
+					if(r.code==1){
+						location.href="{:mac_url('user/index')}";
+					}
+					else{
+						alert(r.msg);
+					}
+				},
+				complete: function () {
+					$('#verify').click();
+					$("#btn_submit").val("Retos it now");
+				}
+			});
+
+		});
+	});
+  </script>
+</body>
+</html>
