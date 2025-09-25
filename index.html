@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="description" content="AnimeFlow - Premium anime streaming platform with high-quality episodes and personalized experience">
+    <meta name="keywords" content="anime, streaming, watch anime online, anime episodes, manga">
+    <meta name="theme-color" content="#1a1a1a">
+    
+    <title>AnimeFlow - Premium Anime Streaming</title>
+    
+    <!-- Preconnect for Performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://accounts.google.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- External Dependencies -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.4.12/hls.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dashjs/4.7.1/dash.all.min.js" defer></script>
+    
+    <!-- Enhanced Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎌</text></svg>">
+    
+    <style>
+        /* CSS Variables */
+        :root {
+            --primary: #ff6b35;
+            --primary-dark: #e55a2d;
+            --secondary: #4facfe;
+            --success: #2ed573;
+            --warning: #ff9f43;
+            --danger: #ff4757;
+            
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #1a1a1a;
+            --bg-tertiary: #2a2a2a;
+            --bg-glass: rgba(255, 255, 255, 0.05);
+            --bg-glass-hover: rgba(255, 255, 255, 0.1);
+            --bg-input: rgba(255, 255, 255, 0.08);
+            
+            --text-primary: #ffffff;
+            --text-secondary: #e0e0e0;
+            --text-muted: #a0a0a0;
+            --text-disabled: #666666;
+            
+            --border-color: rgba(255, 255, 255, 0.1);
+            --border-hover: rgba(255, 255, 255, 0.2);
+            
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.2);
+            --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.3);
+            --shadow-xl: 0 12px 36px rgba(0, 0, 0, 0.4);
+            
+            --radius-sm: 6px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 16px;
+            --radius-full: 50px;
+            
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 32px;
+            --space-2xl: 48px;
+            --space-3xl: 64px;
+            
+            --font-xs: 12px;
+            --font-sm: 14px;
+            --font-md: 16px;
+            --font-lg: 18px;
+            --font-xl: 20px;
+            --font-2xl: 24px;
+            --font-3xl: 30px;
+            --font-4xl: 36px;
+            --font-5xl: 48px;
+            
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-fast: all 0.15s ease;
+        }
+        
+        /* Light theme */
+        [data-theme="light"] {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --bg-tertiary: #e9ecef;
+            --bg-glass: rgba(0, 0, 0, 0.05);
+            --bg-glass-hover: rgba(0, 0, 0, 0.1);
+            --bg-input: rgba(0, 0, 0, 0.08);
+            
+            --text-primary: #1a1a1a;
+            --text-secondary: #333333;
+            --text-muted: #666666;
+            --text-disabled: #999999;
+            
+            --border-color: rgba(0, 0, 0, 0.1);
+            --border-hover: rgba(0, 0, 0, 0.2);
+        }
+
+        /* Reset and Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: var(--transition);
+        }
+        
+        /* Background Effects */
+        .bg-effects {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.6;
+        }
+        
+        .bg-grid {
+            position: absolute;
+            inset: 0;
+            background-image: 
+                linear-gradient(var(--border-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border-color) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: grid-move 20s linear infinite;
+        }
+        
+        @keyframes grid-move {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+        
+        .bg-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+            animation: float 8s ease-in-out infinite;
+        }
+        
+        .bg-orb-1 {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(45deg, var(--primary), var(--warning));
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .bg-orb-2 {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(45deg, var(--secondary), #00f2fe);
+            top: 60%;
+            right: 10%;
+            animation-delay: 2s;
+        }
+        
+        .bg-orb-3 {
+            width: 250px;
+            height: 250px;
+            background: linear-gradient(45deg, #a8edea, #fed6e3);
+            bottom: 10%;
+            left: 50%;
+            animation-delay: 4s;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Loading */
+        .loading-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.95);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            backdrop-filter: blur(10px);
+        }
+        
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--border-color);
+            border-top: 3px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: var(--space-md);
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Toast */
+        .toast-container {
+            position: fixed;
+            top: var(--space-xl);
+            right: var(--space-xl);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+        
+        .toast {
+            background: var(--bg-glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: var(--space-md);
+            color: var(--text-primary);
+            min-width: 300px;
+            max-width: 400px;
+            animation: toastSlide 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .toast-success { border-left: 4px solid var(--success); }
+        .toast-error { border-left: 4px solid var(--danger); }
+        .toast-warning { border-left: 4px solid var(--warning); }
+        .toast-info { border-left: 4px solid var(--secondary); }
+        
+        @keyframes toastSlide {
+            0% { transform: translateX(100%); opacity: 0; }
+            100% { transform: translateX(0); opacity: 1; }
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            padding: var(--space-md) 0;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--space-lg);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2xl);
+        }
+        
+        .nav-logo {
+            font-size: var(--font-2xl);
+            font-weight: 800;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .nav-logo:hover {
+            transform: scale(1.05);
+            color: var(--primary);
+        }
+        
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xl);
+        }
+        
+        .nav-link {
+            color: var(--text-secondary);
+            font-weight: 500;
+            padding: var(--space-sm) var(--space-md);
+            border-radius: var(--radius-sm);
+            transition: var(--transition);
+            text-decoration: none;
+        }
+        
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--text-primary);
+            background: var(--bg-glass-hover);
+        }
+        
+        .nav-search {
+            display: flex;
+            align-items: center;
+            position: relative;
+            max-width: 400px;
+            width: 100%;
+        }
+        
+        .search-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: var(--space-sm) var(--space-lg);
+            padding-right: 50px;
+            background: var(--bg-input);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-full);
+            color: var(--text-primary);
+            font-size: var(--font-sm);
+            outline: none;
+            transition: var(--transition);
+        }
+        
+        .search-input:focus {
+            border-color: var(--primary);
+            background: var(--bg-glass-hover);
+        }
+        
+        .search-btn {
+            position: absolute;
+            right: 8px;
+            padding: var(--space-sm);
+            background: var(--primary);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .search-btn:hover {
+            background: var(--primary-dark);
+            transform: scale(1.05);
+        }
+        
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+        
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+        
+        .admin-btn {
+            background: linear-gradient(45deg, var(--danger), #ff6b9d);
+            color: white;
+            border: none;
+            padding: var(--space-sm) var(--space-md);
+            border-radius: var(--radius-md);
+            font-size: var(--font-sm);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .admin-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--border-color);
+        }
+        
+        .user-name {
+            font-weight: 600;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            cursor: pointer;
+            padding: var(--space-sm) var(--space-md);
+            border-radius: var(--radius-md);
+            transition: var(--transition);
+        }
+        
+        .user-name:hover {
+            background: var(--bg-glass-hover);
+        }
+        
+        .theme-toggle {
+            background: var(--bg-glass);
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            color: var(--text-primary);
+        }
+        
+        .theme-toggle:hover {
+            background: var(--bg-glass-hover);
+            border-color: var(--border-hover);
+        }
+        
+        .theme-icon-light {
+            display: none;
+        }
+        
+        [data-theme="light"] .theme-icon-dark {
+            display: none;
+        }
+        
+        [data-theme="light"] .theme-icon-light {
+            display: block;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: var(--space-sm);
+            color: var(--text-primary);
+        }
+        
+        .hamburger-line {
+            width: 24px;
+            height: 2px;
+            background: currentColor;
+            margin: 2px 0;
+            transition: var(--transition);
+        }
+        
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: rgba(10, 10, 10, 0.98);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .mobile-menu.show {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+        
+        @keyframes slideDown {
+            0% { opacity: 0; transform: translateY(-20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        
+        .mobile-menu-content {
+            padding: var(--space-lg);
+        }
+        
+        .mobile-menu-link {
+            display: block;
+            padding: var(--space-md) 0;
+            color: var(--text-primary);
+            text-decoration: none;
+            border-bottom: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+        
+        .mobile-menu-link:hover {
+            color: var(--primary);
+            padding-left: var(--space-sm);
+        }
+        
+        .mobile-search {
+            margin-top: var(--space-lg);
+            display: flex;
+            gap: var(--space-sm);
+        }
+        
+        .mobile-search-input {
+            flex: 1;
+            padding: var(--space-md);
+            background: var(--bg-input);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            color: var(--text-primary);
+            outline: none;
+        }
+        
+        .mobile-search-btn {
+            padding: var(--space-md) var(--space-lg);
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .mobile-search-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 80px;
+            min-height: calc(100vh - 80px);
+        }
+        
+        .initial-loading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 50vh;
+            gap: var(--space-md);
+        }
+        
+        .loading-text {
+            font-size: var(--font-lg);
+            color: var(--text-muted);
+        }
+
+        /* Auth Page */
+        .auth-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-xl);
+        }
+        
+        .auth-card {
+            background: var(--bg-glass);
+            backdrop-filter: blur(25px);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-xl);
+            padding: var(--space-3xl);
+            text-align: center;
+            max-width: 480px;
+            width: 100%;
+            animation: fadeInUp 0.8s ease;
+        }
+        
+        .auth-logo {
+            font-size: 4rem;
+            margin-bottom: var(--space-lg);
+        }
+        
+        .auth-title {
+            font-size: var(--font-4xl);
+            font-weight: 800;
+            margin-bottom: var(--space-md);
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .auth-subtitle {
+            color: var(--text-secondary);
+            margin-bottom: var(--space-2xl);
+            line-height: 1.6;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: var(--space-md) var(--space-xl);
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: var(--font-md);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-sm);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary), var(--primary-dark));
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .btn-secondary {
+            background: var(--bg-glass);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--bg-glass-hover);
+            border-color: var(--border-hover);
+        }
+
+        /* Modals */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-content {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: var(--space-2xl);
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            animation: modalSlide 0.3s ease;
+        }
+        
+        @keyframes modalSlide {
+            0% { opacity: 0; transform: scale(0.9) translateY(-20px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: var(--space-md);
+            right: var(--space-md);
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding: var(--space-sm);
+            border-radius: var(--radius-sm);
+            transition: var(--transition);
+        }
+        
+        .modal-close:hover {
+            color: var(--text-primary);
+            background: var(--bg-glass-hover);
+        }
+        
+        .modal-title {
+            font-size: var(--font-2xl);
+            font-weight: 700;
+            margin-bottom: var(--space-sm);
+        }
+        
+        .modal-subtitle {
+            color: var(--text-secondary);
+            margin-bottom: var(--space-xl);
+        }
+        
+        .modal-form {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-lg);
+        }
+        
+        .modal-input {
+            padding: var(--space-md);
+            background: var(--bg-input);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            color: var(--text-primary);
+            font-size: var(--font-md);
+            outline: none;
+            transition: var(--transition);
+        }
+        
+        .modal-input:focus {
+            border-color: var(--primary);
+            background: var(--bg-glass-hover);
+        }
+        
+        .modal-actions {
+            display: flex;
+            gap: var(--space-md);
+            justify-content: flex-end;
+        }
+
+        /* Error Boundary */
+        .error-boundary {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+        }
+        
+        .error-content {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            padding: var(--space-3xl);
+            border-radius: var(--radius-lg);
+            text-align: center;
+            max-width: 400px;
+        }
+        
+        .error-content h2 {
+            font-size: var(--font-2xl);
+            margin-bottom: var(--space-md);
+            color: var(--danger);
+        }
+        
+        .error-content p {
+            color: var(--text-secondary);
+            margin-bottom: var(--space-xl);
+        }
+
+        /* Network Status */
+        .network-status {
+            position: fixed;
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--danger);
+            color: white;
+            padding: var(--space-md) var(--space-lg);
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            z-index: 1000;
+            font-size: var(--font-sm);
+            font-weight: 600;
+            animation: slideDown 0.3s ease;
+        }
+
+        /* Utilities */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+        
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: var(--space-md);
+            background: var(--primary);
+            color: white;
+            padding: var(--space-sm) var(--space-md);
+            text-decoration: none;
+            border-radius: var(--radius-sm);
+            z-index: 10000;
+            transition: var(--transition-fast);
+            font-weight: 600;
+        }
+        
+        .skip-link:focus {
+            top: var(--space-md);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        /* Focus Styles */
+        body.keyboard-navigation *:focus {
+            outline: 2px solid var(--primary);
+            outline-offset: 2px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: flex;
+            }
+            
+            .nav-menu {
+                display: none;
+            }
+            
+            .nav-search {
+                display: none !important;
+            }
+            
+            .nav-container {
+                padding: 0 var(--space-md);
+            }
+            
+            .auth-card {
+                padding: var(--space-2xl);
+                margin: var(--space-md);
+            }
+            
+            .auth-title {
+                font-size: var(--font-3xl);
+            }
+            
+            .toast-container {
+                top: var(--space-md);
+                right: var(--space-md);
+                left: var(--space-md);
+            }
+            
+            .toast {
+                min-width: auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-container {
+                padding: 0 var(--space-sm);
+            }
+            
+            .auth-card {
+                padding: var(--space-xl);
+            }
+            
+            .modal-content {
+                padding: var(--space-xl);
+                margin: var(--space-md);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        @media (max-height: 600px) {
+            .auth-page {
+                padding: var(--space-lg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Effects -->
+    <div class="bg-effects">
+        <div class="bg-grid"></div>
+        <div class="bg-orb bg-orb-1"></div>
+        <div class="bg-orb bg-orb-2"></div>
+        <div class="bg-orb bg-orb-3"></div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer" role="status" aria-live="polite"></div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay" role="status" aria-label="Loading">
+        <div class="spinner"></div>
+        <div class="loading-text">Loading AnimeFlow...</div>
+        <span class="sr-only">Loading AnimeFlow application</span>
+    </div>
+
+    <!-- Skip to Content -->
+    <a href="#mainContent" class="skip-link">Skip to main content</a>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
+        <div class="nav-container">
+            <div class="nav-left">
+                <button class="nav-logo" onclick="Router.navigate('/')" 
+                        aria-label="AnimeFlow home" type="button">
+                    🎌 AnimeFlow
+                </button>
+                <div class="nav-menu" id="navMenu" role="menubar">
+                    <a href="#" class="nav-link" onclick="Router.navigate('/')" 
+                       data-route="/" role="menuitem">Home</a>
+                    <a href="#" class="nav-link" onclick="Router.navigate('/browse')" 
+                       data-route="/browse" role="menuitem">Browse</a>
+                    <a href="#" class="nav-link" onclick="Router.navigate('/trending')" 
+                       data-route="/trending" role="menuitem">Trending</a>
+                </div>
+                
+                <!-- Mobile Menu Toggle -->
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" 
+                        aria-label="Toggle mobile menu" aria-expanded="false">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+            </div>
+
+            <div class="nav-search" id="navSearch" style="display: none;">
+                <div class="search-wrapper">
+                    <input type="text" class="search-input" 
+                           placeholder="Search anime..." 
+                           id="searchInput"
+                           aria-label="Search anime"
+                           autocomplete="off"
+                           spellcheck="false">
+                    <button class="search-btn" onclick="Search.performSearch()" 
+                            aria-label="Search" type="button">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="search-suggestions" id="searchSuggestions" style="display: none;"></div>
+            </div>
+
+            <div class="nav-right">
+                <div class="user-profile" id="userProfile" style="display: none;">
+                    <button class="admin-btn" onclick="Router.navigate('/admin')" 
+                            id="adminBtn" style="display: none;" type="button">
+                        Admin Panel
+                    </button>
+                    <div class="user-info">
+                        <img src="" alt="User avatar" class="user-avatar" id="userAvatar">
+                        <button class="user-name" id="userName" onclick="Auth.signOut()" 
+                                type="button" aria-label="Sign out">Sign Out</button>
+                    </div>
+                </div>
+
+                <!-- Theme Toggle -->
+                <button class="theme-toggle" id="themeToggle" 
+                        aria-label="Toggle dark/light theme" type="button">
+                    <svg class="theme-icon theme-icon-dark" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Z"/>
+                    </svg>
+                    <svg class="theme-icon theme-icon-light" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" id="mobileMenu">
+            <div class="mobile-menu-content">
+                <a href="#" class="mobile-menu-link" onclick="Router.navigate('/')">Home</a>
+                <a href="#" class="mobile-menu-link" onclick="Router.navigate('/browse')">Browse</a>
+                <a href="#" class="mobile-menu-link" onclick="Router.navigate('/trending')">Trending</a>
+                <div class="mobile-search">
+                    <input type="text" class="mobile-search-input" placeholder="Search anime..." id="mobileSearchInput">
+                    <button class="mobile-search-btn" onclick="Search.performSearch()" type="button">Search</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <main class="main-content" id="mainContent" role="main">
+        <div class="initial-loading">
+            <div class="loading-text">Initializing AnimeFlow...</div>
+        </div>
+    </main>
+
+    <!-- Modals -->
+    <div class="modal-overlay" id="usernameModal" role="dialog" aria-labelledby="usernameModalTitle" aria-hidden="true">
+        <div class="modal-content">
+            <button class="modal-close" onclick="Auth.hideUsernameModal()" aria-label="Close modal" type="button">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                </svg>
+            </button>
+            <h2 class="modal-title" id="usernameModalTitle">Set Your Username</h2>
+            <p class="modal-subtitle">Choose a username for comments and interactions.</p>
+            <div class="modal-form">
+                <input type="text" class="modal-input" id="usernameInput" 
+                       placeholder="Enter username..." maxlength="20" 
+                       aria-label="Username" autocomplete="username">
+                <div class="modal-actions">
+                    <button class="btn btn-secondary" onclick="Auth.hideUsernameModal()" type="button">Cancel</button>
+                    <button class="btn btn-primary" onclick="Auth.saveUsername()" type="button">Continue</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Error Boundary -->
+    <div class="error-boundary" id="errorBoundary" style="display: none;">
+        <div class="error-content">
+            <h2>Something went wrong</h2>
+            <p>We're sorry, but something unexpected happened.</p>
+            <button class="btn btn-primary" onclick="location.reload()" type="button">Reload Page</button>
+        </div>
+    </div>
+
+    <!-- Network Status -->
+    <div class="network-status offline" id="networkStatus" style="display: none;">
+        <span class="network-icon">⚠️</span>
+        <span class="network-text">You're offline. Some features may not be available.</span>
+    </div>
+
+    <!-- Screen Reader Only Content -->
+    <div class="sr-only">
+        <div id="announcements" aria-live="polite" aria-atomic="true"></div>
+    </div>
+
+    <!-- Core JavaScript Files -->
+    <script src="js/config.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/database.js"></script>
+    <script src="js/router.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/player.js"></script>
+    <script src="js/app.js"></script>
+
+    <script>
+        // Enhanced initialization with error handling
+        window.addEventListener('DOMContentLoaded', () => {
+            try {
+                // Initialize application
+                App.init();
+                
+                // Initialize mobile menu
+                initializeMobileMenu();
+                
+                // Initialize theme toggle
+                initializeThemeToggle();
+                
+                // Initialize network status monitoring
+                initializeNetworkMonitoring();
+                
+                // Initialize error boundary
+                initializeErrorBoundary();
+                
+            } catch (error) {
+                console.error('Initialization failed:', error);
+                showErrorBoundary(error);
+            }
+        });
+
+        // Mobile menu functionality
+        function initializeMobileMenu() {
+            const toggle = document.getElementById('mobileMenuToggle');
+            const menu = document.getElementById('mobileMenu');
+            
+            if (toggle && menu) {
+                toggle.addEventListener('click', () => {
+                    const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+                    toggle.setAttribute('aria-expanded', !isExpanded);
+                    menu.classList.toggle('show');
+                    document.body.classList.toggle('menu-open');
+                });
+
+                // Close menu when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (!toggle.contains(e.target) && !menu.contains(e.target)) {
+                        toggle.setAttribute('aria-expanded', 'false');
+                        menu.classList.remove('show');
+                        document.body.classList.remove('menu-open');
+                    }
+                });
+            }
+        }
+
+        // Theme toggle functionality
+        function initializeThemeToggle() {
+            const toggle = document.getElementById('themeToggle');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const savedTheme = localStorage.getItem('animeflow-theme') || (prefersDark ? 'dark' : 'light');
+            
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            
+            if (toggle) {
+                toggle.addEventListener('click', () => {
+                    const currentTheme = document.documentElement.getAttribute('data-theme');
+                    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                    
+                    document.documentElement.setAttribute('data-theme', newTheme);
+                    localStorage.setItem('animeflow-theme', newTheme);
+                });
+            }
+        }
+
+        // Network monitoring
+        function initializeNetworkMonitoring() {
+            const statusEl = document.getElementById('networkStatus');
+            
+            function updateNetworkStatus() {
+                if (!navigator.onLine) {
+                    statusEl.style.display = 'flex';
+                    statusEl.classList.add('offline');
+                } else {
+                    statusEl.style.display = 'none';
+                    statusEl.classList.remove('offline');
+                }
+            }
+            
+            window.addEventListener('online', updateNetworkStatus);
+            window.addEventListener('offline', updateNetworkStatus);
+            updateNetworkStatus();
+        }
+
+        // Error boundary
+        function initializeErrorBoundary() {
+            window.addEventListener('error', (event) => {
+                console.error('Global error:', event.error);
+                if (event.error?.stack?.includes('AnimeFlow')) {
+                    showErrorBoundary(event.error);
+                }
+            });
+
+            window.addEventListener('unhandledrejection', (event) => {
+                console.error('Unhandled promise rejection:', event.reason);
+                if (CONFIG.DEBUG) {
+                    showErrorBoundary(new Error(event.reason));
+                }
+            });
+        }
+
+        function showErrorBoundary(error) {
+            const boundary = document.getElementById('errorBoundary');
+            if (boundary) {
+                boundary.style.display = 'flex';
+                
+                if (CONFIG.DEBUG) {
+                    boundary.querySelector('.error-content p').textContent = error.message;
+                }
+            }
+        }
+
+        // Service Worker registration
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(registrationError => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Tab') {
+                document.body.classList.add('keyboard-navigation');
+            }
+        });
+
+        document.addEventListener('mousedown', () => {
+            document.body.classList.remove('keyboard-navigation');
+        });
+
+        // Optimize images
+        function optimizeImages() {
+            const images = document.querySelectorAll('img[data-src]');
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src;
+                        img.classList.remove('lazy');
+                        imageObserver.unobserve(img);
+                    }
+                });
+            });
+
+            images.forEach(img => imageObserver.observe(img));
+        }
+
+        // Initialize lazy loading when DOM is ready
+        document.addEventListener('DOMContentLoaded', optimizeImages);
+    </script>
+</body>
+</html>
