@@ -1,0 +1,14 @@
+<section class="section">
+<div class="wrap">
+     {maccms:type  order="asc" by="sort" ids="0" id="vo1" key="key1"  flag="vod"}
+	<div class="mod index-list">
+		<div class="title"><h3><a href="{:mac_url_type($vo1,[],'type')}">{$vo1.type_name}<font size="2" color="#FFFFFF">   View More+</font></a></h3></div>
+		<div class="block-post">
+		 {maccms:vod num="8" type="'.$vo1['type_id'].'" order="desc" by="time"}  
+	    {include file="public/vodbox"}
+		{/maccms:vod}	
+		</div>
+	</div>
+	 {/maccms:type}
+</div>
+</section>
