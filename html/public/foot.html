@@ -1,0 +1,25 @@
+	<footer class="footer">
+				<div class="block-footer">
+					<div class="wrap">
+						<div class="flex">
+							<a href="http://{$maccms.site_url}" class="logo">
+								<img src="{$maccms.site_logo|mac_url_img}" width="191" height="60">
+							</a>
+							<nav class="nav">
+								<ul class="menu">
+									<li><a class="active" href="{$maccms.path}">Home</a></li>
+									<li><a href="{:mac_url('rss/google')}">sitemap</a></li>
+								</ul>
+							</nav>
+							<div class="copyright">
+								<p>😈 {$maccms.site_name}</p>
+								<p>2024-2030 {$maccms['site_url']}. All Rights Reserved. </p>
+								<div style="display: none;"></div>
+								<p><a>Disclaimer: All content on this website is provided for informational purposes only. We do not host any copyrighted material. If you find any content that may infringe upon your rights, please contact us at {$maccms.site_email}. We are committed to reviewing and addressing valid concerns and will remove any infringing content promptly. Thank you for your cooperation.</a></p>
+								<p>{$maccms.site_tj}</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</footer>
+				        	{include file="public/style"}

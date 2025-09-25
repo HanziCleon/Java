@@ -1,0 +1,57 @@
+		<script type="text/javascript" src="{$maccms.path_tpl}ksassets/js/main2.min.js"></script>
+		<script type="text/javascript" src="{$maccms.path_tpl}ksassets/js/jquery.easy-autocomplete3.js"></script>
+		<script src="{$maccms.path_tpl}ksassets/js/jquery.star-rating-svg.js"></script>
+		<script type="text/javascript" src="{$maccms.path_tpl}ksassets/js/main5.js"></script>
+        <script src="{$maccms.path_tpl}ksassets/js/layer.min.js"></script>
+		 <script src="{$maccms.path}static/js/jquery.imageupload.js"></script>
+		<script>
+				function favs(id) {
+					var userstatus = "0";
+					$.get("/index.php/user/ajax_ulog/?ac=set&mid=1&id=" + id + "&type=2", function(data) {
+						if (data.msg == "Succeed") {
+							layer.msg('Collect');
+						} else if (userstatus == "0") {
+							layer.msg('Please log in first');
+						} else if (userstatus == "1") {
+							layer.msg('Successful collection');
+						}
+					}, "json");
+				}
+				function artfavs(id) {
+					var userstatus = "0";
+					$.get("/index.php/user/ajax_ulog/?ac=set&mid=2&id=" + id + "&type=2", function(data) {
+						if (data.msg == "Succeed") {
+							layer.msg('Collect');
+						} else if (userstatus == "0") {
+							layer.msg('Please log in first');
+						} else if (userstatus == "1") {
+							layer.msg('Successful collection');
+						}
+					}, "json");
+				}
+
+				function actorfavs(id) {
+					var userstatus = "0";
+					$.get("/index.php/user/ajax_ulog/?ac=set&mid=8&id=" + id + "&type=2", function(data) {
+						if (data.msg == "Succeed") {
+							layer.msg('Collect');
+						} else if (userstatus == "0") {
+							layer.msg('Please log in first');
+						} else if (userstatus == "1") {
+							layer.msg('Successful collection');
+						}
+					}, "json");
+				}
+				function topicfavs(id) {
+					var userstatus = "0";
+					$.get("/index.php/user/ajax_ulog/?ac=set&mid=3&id=" + id + "&type=2", function(data) {
+						if (data.msg == "Succeed") {
+							layer.msg('Collect');
+						} else if (userstatus == "0") {
+							layer.msg('Please log in first');
+						} else if (userstatus == "1") {
+							layer.msg('Successful collection');
+						}
+					}, "json");
+				}
+			</script>

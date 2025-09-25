@@ -1,0 +1,59 @@
+<header class="header gddh">
+			<div class="search easy-autocomplete">
+				<form action="{:mac_url('vod/search')}" method="get"  class="form">
+					<div class="input wrap-input">
+						<input type="text" name="wd" placeholder="Please enter the movie name or actor name here" value="{$param.wd}" autocomplete="off">
+						<button type="submit" class="search-btn" aria-label="Search">
+							<i class="icon-search"></i>
+						</button>
+					</div>
+				</form>
+			</div>
+
+			<div class="wrap madou">
+				<div class="flex">
+					<div class="left-block">
+						<span class="icon-hamb hamb-menu"></span>
+						<a href="{$maccms.path}" class="logo">
+							<img src="{$maccms.site_logo|mac_url_img}" width="191" height="60">
+						</a>
+					</div>
+					<nav class="nav">
+						<ul class="menu">
+							<li>
+								<a href="{$maccms.path}" {if condition="$maccms.aid eq 1"}class="active"{/if}>Home</a>
+							</li>
+							<li>
+								<a {if condition="$maccms.aid eq 9999"}class="active"{/if} href="{:mac_url('label/new')}">Latest Videos</a>
+							</li>
+							<li>
+								<a {if condition="$maccms.aid eq 9998"}class="active"{/if} href="{:mac_url('label/hot')}">Popular Videos</a>
+							</li>
+							</li>
+							<li>
+								<a {if condition="$maccms.aid eq 9995"}class="active"{/if} href="{:mac_url('label/sort')}">All Videos</a>
+							</li>
+							<!--<li>
+								<a {if condition="$maccms.aid eq 30"}class="active"{/if} href="{:mac_url_topic_index()}">Special topic</a>
+							</li>
+							<li>
+								<a  {if condition="$maccms.aid eq 9994"}class="active"{/if}  href="{:mac_url('actor/index')}">star</a>
+								</li>
+							<li>
+								<a href="https://www.laoya.xyz/download" {class="active"{/if}>APPdownload</a>
+							</li>-->
+						</ul>
+					</nav>
+					<div class="right-block">
+						<span class="btn-search link-icon">
+							<span class="icon-search"></span>
+							<span class="icon-close"></span>
+						</span>
+		
+
+					</div>
+				</div>
+			</div>
+		</header>
+		
+   
