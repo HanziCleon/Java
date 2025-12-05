@@ -842,3 +842,7 @@ app.listen(PORT, () => {
   log('SERVER', `Environment: ${process.env.NODE_ENV || 'development'}`, 'info');
   log('SERVER', '='.repeat(50), 'info');
 });
+
+               startServer();
+
+export default app;
