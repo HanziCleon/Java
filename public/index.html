@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DongTube - Premium Anime Streaming</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<div class="bg-animation">
+  <div class="floating-orb orb-1"></div>
+  <div class="floating-orb orb-2"></div>
+</div>
+
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="nav-brand">
+      <a href="/" class="brand-link">
+        <span class="brand-icon">✨</span>
+        <span class="brand-text">DongTube</span>
+      </a>
+    </div>
+    <div class="nav-actions" id="navActions">
+      <button id="authBtn" class="nav-btn" title="Login">🔐 Login</button>
+    </div>
+  </div>
+</nav>
+
+<section class="hero-section">
+  <div class="hero-content">
+    <h1 class="hero-title">
+      <span class="gradient-text">Premium Anime</span>
+      <span class="hero-subtitle">Streaming Platform</span>
+    </h1>
+    <p class="hero-description">
+      Discover and stream ribuan anime series dengan kualitas HD
+    </p>
+    
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-number" id="animeCount">0</div>
+        <div class="stat-label">Anime Series</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">HD</div>
+        <div class="stat-label">Quality</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">24/7</div>
+        <div class="stat-label">Streaming</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+  <section class="search-section">
+    <div class="search-header">
+      <h2 class="section-title">Explore Collection</h2>
+      <div class="view-controls">
+        <button id="gridView" class="view-btn active" title="Grid View">⊞</button>
+        <button id="listView" class="view-btn" title="List View">☰</button>
+      </div>
+    </div>
+    
+    <div class="search-wrapper">
+      <div class="search-box">
+        <input type="text" id="searchInput" class="search-input" placeholder="Cari anime...">
+        <span class="search-icon">🔍</span>
+      </div>
+      
+      <select id="sortSelect" class="sort-select">
+        <option value="title">Judul A-Z</option>
+        <option value="newest">Terbaru</option>
+        <option value="episodes">Episode</option>
+      </select>
+      
+      <button id="resetBtn" class="reset-btn">Reset</button>
+    </div>
+  </section>
+
+  <div class="results-info">
+    <span><span class="result-count" id="resultCount">0</span> anime ditemukan</span>
+    <div id="loadingIndicator" class="loading-indicator">
+      <div class="spinner"></div>
+      <span>Loading...</span>
+    </div>
+  </div>
+
+  <main>
+    <div id="animeList" class="anime-grid"></div>
+    
+    <div id="skeletonWrapper" class="skeleton-grid">
+      <div class="skeleton"></div>
+      <div class="skeleton"></div>
+      <div class="skeleton"></div>
+      <div class="skeleton"></div>
+      <div class="skeleton"></div>
+      <div class="skeleton"></div>
+    </div>
+    
+    <div id="noResults" class="no-results" style="display:none;">
+      <div class="no-results-icon">😞</div>
+      <h3>Anime tidak ditemukan</h3>
+      <p>Coba sesuaikan pencarian Anda atau lihat semua anime</p>
+      <button class="btn" onclick="resetFilters()">Lihat Semua</button>
+    </div>
+  </main>
+</div>
+
+<footer class="footer">
+  <div class="footer-content">
+    <span>&copy; 2025 DongTube - Premium Anime Streaming</span>
+    <div class="footer-links">
+      <a href="#" class="footer-link">About</a>
+      <a href="https://wa.me/6283143961588" class="footer-link">Contact</a>
+      <a href="#" class="footer-link">Privacy</a>
+    </div>
+  </div>
+</footer>
+
+<div id="toast-container" class="toast-container"></div>
+
+<script src="/script.js"></script>
+</body>
+</html>
