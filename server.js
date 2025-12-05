@@ -18,6 +18,9 @@ const upload = multer();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+const isVercel = process.env.VERCEL === '1';
+const isDev = process.env.NODE_ENV === 'development';
+
 // ==== SETUP LOG FILE ====
 const LOG_DIR = path.join(__dirname, 'log');
 const LOG_FILE = path.join(LOG_DIR, 'server.log');
