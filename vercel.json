@@ -7,13 +7,6 @@
     "NODE_ENV": "production"
   },
   "regions": ["sin1"],
-  "functions": {
-    "server.js": {
-      "memory": 1024,
-      "maxDuration": 60,
-      "runtime": "nodejs18.x"
-    }
-  },
   "rewrites": [
     {
       "source": "/api/(.*)",
@@ -84,7 +77,12 @@
   "builds": [
     {
       "src": "server.js",
-      "use": "@vercel/node"
+      "use": "@vercel/node",
+      "config": {
+        "memory": 1024,
+        "maxDuration": 60,
+        "runtime": "nodejs18.x"
+      }
     },
     {
       "src": "public/**",
