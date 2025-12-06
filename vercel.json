@@ -1,0 +1,55 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "server.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "public/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/public/(.*)",
+      "dest": "/public/$1"
+    },
+    {
+      "src": "/style\\.css",
+      "dest": "/public/style.css"
+    },
+    {
+      "src": "/script\\.js",
+      "dest": "/public/script.js"
+    },
+    {
+      "src": "/watch\\.css",
+      "dest": "/public/watch.css"
+    },
+    {
+      "src": "/watch-script\\.js",
+      "dest": "/public/watch-script.js"
+    },
+    {
+      "src": "/api/(.*)",
+      "dest": "/server.js"
+    },
+    {
+      "src": "/(.*)\\.html",
+      "dest": "/public/$1.html"
+    },
+    {
+      "src": "/auth",
+      "dest": "/public/auth.html"
+    },
+    {
+      "src": "/watch",
+      "dest": "/public/watch.html"
+    },
+    {
+      "src": "/",
+      "dest": "/public/index.html"
+    }
+  ]
+}
